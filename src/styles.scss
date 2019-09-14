@@ -11,3 +11,9 @@ body {
   font-family: $body-font;
   font-weight: $body-font-weight;
 }
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
