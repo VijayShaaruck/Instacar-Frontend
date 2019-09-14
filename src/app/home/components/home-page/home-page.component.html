@@ -1,54 +1,114 @@
 <div class="center home-background">
-  <div>
-    <form
-      [formGroup]="RoundTripForm"
-      class="center-block"
-      class="form-group"
-      (ngSubmit)="BookRoundTrip()"
-    >
-      <input
-        type="text"
-        placeholder="From:"
-        formControlName="from"
-        autocorrect="off"
-        autocapitalize="off"
-        spellcheck="off"
-        class="inputControl"
-        #search
-      />
-      <input
-        type="text"
-        placeholder="To:"
-        formControlName="to"
-        autocorrect="off"
-        autocapitalize="off"
-        spellcheck="off"
-        class="inputControl"
-        #search
-      />
+  <ngb-tabset>
+    <ngb-tab title="Round Trip" class="mr-2">
+      <ng-template ngbTabContent>
+        <form
+          [formGroup]="RoundTripForm"
+          class="center-block"
+          class="horizontal-center"
+          (ngSubmit)="BookRoundTrip()"
+        >
+          <input
+            type="text"
+            placeholder="From:"
+            formControlName="RoundTripfrom"
+            autocorrect="off"
+            autocapitalize="off"
+            spellcheck="off"
+            class="inputControl"
+            required
+            #RoundTripFromSearch
+          />
+          <input
+            type="text"
+            placeholder="To:"
+            formControlName="RoundTripto"
+            autocorrect="off"
+            autocapitalize="off"
+            spellcheck="off"
+            class="inputControl"
+            required
+            #RoundTripToSearch
+          />
 
-      <input
-        type="text"
-        class="inputControl"
-        formControlName="departDate"
-        placeholder="Depart Date:"
-      />
+          <input
+            type="text"
+            class="inputControl"
+            formControlName="RoundTripdepartDate"
+            placeholder="Depart Date:"
+            required
+          />
 
-      <input
-        type="text"
-        class="inputControl"
-        formControlName="returnDate"
-        placeholder="ReturnDate:"
-      />
+          <input
+            type="text"
+            class="inputControl"
+            formControlName="RoundTripreturnDate"
+            placeholder="ReturnDate:"
+            required
+          />
 
-      <button
-        id="submitButton"
-        [disabled]="tripSubmitClick"
-        type="submit"
-        class="btn btn-primary inputControl"
-      >
-        Book
-      </button>
-    </form>
-  </div>
+          <button
+            id="submitButton"
+            [disabled]="!RoundTripForm.valid"
+            type="submit"
+            class="btn btn-primary inputControl book-button"
+          >
+            Book
+          </button>
+        </form>
+      </ng-template>
+    </ngb-tab>
+    <ngb-tab title="Packages">
+      <ng-template ngbTabContent>
+        <form
+          [formGroup]="PackageTripForm"
+          class="center-block"
+          class="horizontal-center"
+        >
+          <input
+            type="text"
+            placeholder="From:"
+            formControlName="PackageTripfrom"
+            autocorrect="off"
+            autocapitalize="off"
+            spellcheck="off"
+            class="inputControl"
+            required
+            #search
+          />
+          <div ngbDropdown class="d-inline-block">
+            <button
+              style="margin-bottom: 2px; color: black;
+              background-color: white; border-radius:0px"
+              class="btn btn-outline-primary inputControl"
+              id="dropdownBasic1"
+              ngbDropdownToggle
+            >
+              Choose Package
+            </button>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+              <button ngbDropdownItem>Airport</button>
+            </div>
+          </div>
+          <input
+            type="text"
+            class="inputControl"
+            formControlName="PackageTripdepartDate"
+            placeholder="Depart Date:"
+            required
+          />
+
+          <button
+            id="submitButton"
+            [disabled]="!PackageTripForm.valid"
+            type="submit"
+            (click)="BookPackageTrip()"
+            class="btn btn-primary inputControl book-button"
+          >
+            Book
+          </button>
+        </form>
+      </ng-template>
+    </ngb-tab>
+  </ngb-tabset>
 </div>

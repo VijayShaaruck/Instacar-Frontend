@@ -18,13 +18,22 @@ import { MapsAPILoader } from '@agm/core';
 })
 export class HomePageComponent implements OnInit {
   RoundTripForm = new FormGroup({
-    from: new FormControl(''),
-    to: new FormControl(''),
-    departDate: new FormControl(''),
-    returnDate: new FormControl('')
+    RoundTripfrom: new FormControl(''),
+    RoundTripto: new FormControl(''),
+    RoundTripdepartDate: new FormControl(''),
+    RoundTripreturnDate: new FormControl('')
   });
 
-  @ViewChild('search', { static: false }) public searchElement: ElementRef;
+  PackageTripForm = new FormGroup({
+    PackageTripfrom: new FormControl(''),
+    PackageTripto: new FormControl(''),
+    PackageTripdepartDate: new FormControl('')
+  });
+
+  @ViewChild('RoundTripFromSearch', { static: false })
+  public RoundTripFromSearch: ElementRef;
+  @ViewChild('RoundTripToSearch', { static: false })
+  public RoundTripToSearch: ElementRef;
 
   constructor(
     tabsetConfig: NgbTabsetConfig,
@@ -39,7 +48,7 @@ export class HomePageComponent implements OnInit {
   ngOnInit() {
     this.mapsAPILoader.load().then(() => {
       const autocomplete = new google.maps.places.Autocomplete(
-        this.searchElement.nativeElement,
+        this.RoundTripFromSearch.nativeElement,
         { types: [], componentRestrictions: { country: 'IN' } }
       );
 
@@ -55,6 +64,10 @@ export class HomePageComponent implements OnInit {
   }
 
   BookRoundTrip() {
-    console.log('Submit clicked');
+    console.log('RoundTrip book');
+  }
+
+  BookPackageTrip() {
+    console.log('Package Book');
   }
 }
