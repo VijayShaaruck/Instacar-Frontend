@@ -46,9 +46,27 @@ export class HomePageComponent implements OnInit {
   }
 
   ngOnInit() {
+    // Google maps search for RoundTrip from
     this.mapsAPILoader.load().then(() => {
       const autocomplete = new google.maps.places.Autocomplete(
         this.RoundTripFromSearch.nativeElement,
+        { types: [], componentRestrictions: { country: 'IN' } }
+      );
+
+      autocomplete.addListener('place_changed', () => {
+        this.ngZone.run(() => {
+          const place: google.maps.places.PlaceResult = autocomplete.getPlace();
+          if (place.geometry === undefined || place.geometry === null) {
+            return;
+          }
+        });
+      });
+    });
+
+    // Google maps search for RoundTrip to
+    this.mapsAPILoader.load().then(() => {
+      const autocomplete = new google.maps.places.Autocomplete(
+        this.RoundTripToSearch.nativeElement,
         { types: [], componentRestrictions: { country: 'IN' } }
       );
 

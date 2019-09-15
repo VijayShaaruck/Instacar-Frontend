@@ -32,20 +32,34 @@
           />
 
           <input
-            type="text"
             class="inputControl"
-            formControlName="RoundTripdepartDate"
             placeholder="Depart Date:"
+            formControlName="RoundTripdepartDate"
+            ngbDatepicker
+            #RTdepartdate="ngbDatepicker"
             required
           />
+          <button
+            style="margin-bottom: 2px; background-color: white;"
+            class="btn btn-primary inputControl calendar"
+            (click)="RTdepartdate.toggle()"
+            type="button"
+          ></button>
 
           <input
-            type="text"
             class="inputControl"
-            formControlName="RoundTripreturnDate"
             placeholder="ReturnDate:"
+            formControlName="RoundTripreturnDate"
+            ngbDatepicker
+            #RTreturndate="ngbDatepicker"
             required
           />
+          <button
+            style="margin-bottom: 2px; background-color: white;"
+            class="btn btn-primary inputControl calendar"
+            (click)="RTreturndate.toggle()"
+            type="button"
+          ></button>
 
           <button
             id="submitButton"
@@ -74,7 +88,7 @@
             spellcheck="off"
             class="inputControl"
             required
-            #search
+            #PackageTripFromSearch
           />
           <div ngbDropdown class="d-inline-block">
             <button
@@ -91,12 +105,19 @@
             </div>
           </div>
           <input
-            type="text"
             class="inputControl"
-            formControlName="PackageTripdepartDate"
             placeholder="Depart Date:"
+            formControlName="PackageTripdepartDate"
+            ngbDatepicker
+            #PTdepartdate="ngbDatepicker"
             required
           />
+          <button
+            style="margin-bottom: 2px; background-color: white;"
+            class="btn btn-primary inputControl calendar"
+            (click)="PTdepartdate.toggle()"
+            type="button"
+          ></button>
 
           <button
             id="submitButton"
