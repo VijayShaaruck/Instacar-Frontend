@@ -90,20 +90,18 @@
             required
             #PackageTripFromSearch
           />
-          <div ngbDropdown class="d-inline-block">
-            <button
-              style="margin-bottom: 2px; color: black;
-              background-color: white; border-radius:0px"
-              class="btn btn-outline-primary inputControl"
-              id="dropdownBasic1"
-              ngbDropdownToggle
+
+          <select
+            class="inputControl"
+            id="reasonSelect"
+            formControlName="PackageTrip"
+            style="width: 100px"
+          >
+            <option class="options" value="Airport" [selected]="true"
+              >Airport</option
             >
-              Choose Package
-            </button>
-            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-              <button ngbDropdownItem>Airport</button>
-            </div>
-          </div>
+          </select>
+
           <input
             class="inputControl"
             placeholder="Depart Date:"

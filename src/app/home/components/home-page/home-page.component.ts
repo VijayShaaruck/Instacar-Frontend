@@ -7,7 +7,10 @@ import {
   NgZone
 } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { NgbTabsetConfig } from '@ng-bootstrap/ng-bootstrap';
+import {
+  NgbTabsetConfig,
+  NgbDatepickerConfig
+} from '@ng-bootstrap/ng-bootstrap';
 
 import { MapsAPILoader } from '@agm/core';
 
@@ -26,7 +29,7 @@ export class HomePageComponent implements OnInit {
 
   PackageTripForm = new FormGroup({
     PackageTripfrom: new FormControl(''),
-    PackageTripto: new FormControl(''),
+    PackageTrip: new FormControl(''),
     PackageTripdepartDate: new FormControl('')
   });
 
@@ -36,16 +39,33 @@ export class HomePageComponent implements OnInit {
   public RoundTripToSearch: ElementRef;
 
   constructor(
-    tabsetConfig: NgbTabsetConfig,
+    private tabsetConfig: NgbTabsetConfig,
     private mapsAPILoader: MapsAPILoader,
-    private ngZone: NgZone
+    private ngZone: NgZone,
+    private config: NgbDatepickerConfig
   ) {
     // customize default values of tabsets used by this component tree
     tabsetConfig.justify = 'center';
     tabsetConfig.type = 'pills';
+
+    const current = new Date();
+    config.minDate = {
+      year: current.getFullYear(),
+      month: current.getMonth() + 1,
+      day: current.getDate()
+    };
+    config.outsideDays = 'hidden';
   }
 
   ngOnInit() {
+    this.RoundTripForm.controls['RoundTripfrom'].setValue(
+      'Bengaluru, Karnataka, India'
+    );
+
+    this.PackageTripForm.controls['PackageTripfrom'].setValue(
+      'Bengaluru, Karnataka, India'
+    );
+
     // Google maps search for RoundTrip from
     this.mapsAPILoader.load().then(() => {
       const autocomplete = new google.maps.places.Autocomplete(
@@ -86,6 +106,6 @@ export class HomePageComponent implements OnInit {
   }
 
   BookPackageTrip() {
-    console.log('Package Book');
+    console.log('Package Book' + this.PackageTripForm.value.PackageTrip);
   }
 }
